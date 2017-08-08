@@ -193,7 +193,7 @@ sub parseResponse()
 		end if
 
 		print url
-	
+          	
 		'get the XML based on request
 		if url <> "" and xml.Parse(getXML(url))
 

@@ -13,8 +13,14 @@ sub Init()
   m.UriHandler = CreateObject("roSGNode", "UriHandler")
   m.UriHandler.observeField("content", "onContentChanged")
 
-  makeRequest("https://iptv.streamotor.com/roku.xml?cmd=getSettings&AccountID=6th-Grade-Alabama")
-  makeRequest("https://iptv.streamotor.com/roku.xml?cmd=getCategories&AccountID=6th-Grade-Alabama&CategoryID=")
+  'Make a request for each "row" in the UI (in the order that you want content filled)
+  URLs = [
+  ' Uncomment this line to simulate a bad request and make the dialog box appear
+  ' "bad request",
+  "https://iptv.streamotor.com/roku.xml?cmd=getCategories&AccountID=6th-Grade-Alabama&CategoryID="
+  ]
+  makeRequest(URLs,"SMParser")
+
 	
   'Create observer events for when content is loaded
   m.top.observeField("visible", "onVisibleChange")
@@ -38,6 +44,25 @@ sub makeRequest( URL as String )
 		parser: "SMParser"
 	}
   
+end sub
+
+sub makeRequest(URLs as object, ParserComponent as String)
+  'print "HeroScreen.brs - [makeRequest]"
+  for i = 0 to URLs.count() - 1
+    context = createObject("roSGNode", "Node")
+    uri = { uri: URLs[i] }
+    if type(uri) = "roAssociativeArray"
+      context.addFields({
+        parameters: uri,
+        num: i,
+        response: {}
+    })
+    m.UriHandler.request = {
+      context: context
+      parser: ParserComponent
+    }
+    end if
+  end for
 end sub
 
 ' observer function to handle when content loads
