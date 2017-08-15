@@ -26,7 +26,7 @@ sub parseResponse()
 	if m.UriHandler = invalid then 
 		m.UriHandler = m.top.getParent()
 	end if
-
+     'if get settings is selected
 	if cmd = "getSettings"
 		
 		settings = {
@@ -40,7 +40,7 @@ sub parseResponse()
 		end if
 
 		m.UriHandler.contentCache.addFields(settings)
-
+     'if command is get categories
 	else if cmd = "getCategories"
 		
 		'get the categories
@@ -173,7 +173,7 @@ sub parseResponse()
 		end if
 
 		m.UriHandler.contentCache.addFields(results)
-
+     'if get videos is needed
 	else if cmd = "getVideos"
 		'create empty array
 		results = []

@@ -28,7 +28,7 @@ sub init()
   m.top.control = "RUN"
 end sub
 
-
+'this function runs all of the handler
 sub go()
 	
 	m.jobsById = {}

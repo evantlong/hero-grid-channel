@@ -39,7 +39,6 @@ sub OnChangeContent()
   end if
 end sub
 
-' Row item selected handler function.
 ' On select any item on home scene, show Details node and hide Grid.
 sub OnRowItemSelected()
   print "HeroScene.brs - [OnRowItemSelected]"
@@ -51,6 +50,8 @@ sub OnRowItemSelected()
 end sub
 
 ' Called when a key on the remote is pressed
+'this function can only be used once in the application
+'if needed to run on key events, need to work them around this function
 function onKeyEvent(key as String, press as Boolean) as Boolean
   print ">>> HomeScene >> OnkeyEvent"
   result = false
